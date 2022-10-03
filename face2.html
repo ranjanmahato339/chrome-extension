@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            background-color: #4974a5;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bird {
+            position: absolute;
+
+            width: 400px;
+            height: 400px;
+
+
+        }
+
+        .head {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: #df001f;
+            border-radius: 50%;
+            border: 3px solid black;
+            overflow: hidden;
+            box-shadow: 2px 8px 27px 3px black;
+        }
+
+        .head::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: #eccaa8;
+            border-radius: 50%;
+            top: 64%;
+            left: 15%;
+        }
+
+        .tails {
+            position: absolute;
+            width: 104%;
+            height: 104%;
+            filter: drop-shadow(-3px 8px 27px black);
+        }
+
+        .tail-middle,
+        .tail-top,
+        .tail-bottom {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            clip-path: polygon(0 27%, 100% 40%, 100% 68%, 0 79%);
+            background: #000801;
+        }
+
+        .tail-middle {
+            top: 36%;
+            left: -17%;
+
+        }
+
+        .tail-top {
+            top: 30%;
+            left: -8%;
+            transform: rotate(35deg);
+        }
+
+        .tail-bottom {
+            top: 44%;
+            left: -11%;
+            transform: rotate(-25deg);
+        }
+
+        .eyebrow-right {
+            position: absolute;
+            width: 140px;
+            height: 50px;
+            background: #000801;
+            top: 25%;
+            right: 15%;
+            transform: rotate(-8deg);
+            z-index: 10;
+        }
+
+        .eyebrow-left {
+            position: absolute;
+            width: 140px;
+            height: 50px;
+            background: #000801;
+            top: 25%;
+            left: 17%;
+            transform: rotate(8deg);
+            z-index: 10;
+        }
+
+        .eyeright {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: #fff;
+            top: 30%;
+            right: 20%;
+            border-radius: 50%;
+            box-shadow: 10px 3px 10px 3px #ab0024;
+            border: 2px solid black;
+        }
+
+        .eyeleft {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: #fff;
+            top: 30%;
+            left: 21%;
+            border-radius: 50%;
+            box-shadow: -10px 3px 10px 3px #ab0024;
+            border: 2px solid black;
+        }
+
+        .eye {  
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #000;
+            top: 25%;
+            right: 40%;
+            transform-origin: bottom;
+        }
+
+        .eyeball {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #fff;
+            top: 13%;
+            right: 14%;
+        }
+
+        .border1 {
+        position: absolute;
+        top: 51%;
+    left: 39.5%;
+    width: 114px;
+    height: 99px;
+    clip-path: inset(18% 13% 32% 5%round 24% 14% 32% 39%);
+    background-color: black;
+    transform: rotate(54deg);
+    transition: all 1s;
+    }
+
+    .border2 {
+        position: absolute;
+        top: 57.5%;
+    left: 38.9%;
+    width: 114px;
+    height: 99px;
+    clip-path: inset(18% 22% 5% 8% round 15% 5% 10% 14%);
+    background-color: black;
+    transform: rotate(131deg);
+    transition: all 1s;
+    }
+    .border3 {
+        position: absolute;
+        top: 43.5%;
+    left: 26.1%;
+    width: 114px;
+    height: 99px;
+    clip-path: inset(0% 11% 64% 12% round 15% 5% 10% 14%);
+    background-color: #000000;
+    transform: rotate(127deg);
+    transition: all 1s;
+    } 
+    .border4{
+        position: absolute;
+        top: 64.5%;
+    left: 26.5%;
+    width: 114px;
+    height: 99px;
+    clip-path: inset(0% 8% 64% 12% round 15% 24% 3% 14%);
+    background-color: #000000;
+    transform: rotate(46deg);
+    transition:all 1s;
+    }
+    .beaktop,
+    .beak,
+    .beakdown,
+    .beakline {
+        display: flex;
+        position: absolute;
+        height: 70px;
+        width: 100px;
+        margin: auto;
+        transition: all 1s;
+    }
+
+    .beaktop {
+        top: 49%;
+    left: 39%;
+        clip-path: circle(25% at 50% 50%);
+        background-color: #fca90d;
+    }
+
+    .beak {
+        top: 55%;
+    left: 39%;
+
+        clip-path: polygon(67% -2%, 100% 65%, 50% 80%, 0% 65%, 31% 5%);
+        background-color: #fca90d;
+        ;
+    }
+
+    .beakline {
+        top: 59.8%;
+    left: 39%;
+        clip-path: polygon(0% 35%, 50% 50%, 100% 35%, 100% 45%, 50% 60%, 0% 45%);
+        background-color: #0f0d08;
+
+    }
+
+    .beakdown {
+        top: 67.4%;
+    left: 39%;
+        background-color: #fca90d;
+        clip-path: polygon(50% 15%, 100% 0%, 50% 84%, 0% 0%);
+    }
+
+    .bird:hover .beak {
+
+        clip-path: polygon(67% -2%, 100% 75%, 50% 75%, 0% 75%, 31% 5%);
+    }
+
+    .bird:hover .beakline {
+
+        clip-path: polygon(0% 45%, 50% 45%, 100% 45%, 100% 55%, 50% 55%, 0 55%);
+    }
+
+    .bird:hover .beakdown {
+
+        clip-path: polygon(50% 10%, 100% 10%, 50% 84%, 0% 10%);
+    }
+    .bird:hover .border1{
+        clip-path: inset(18% 8% 32% 8%round 69% 20% 32% 84%);
+        transform: rotate(58deg);
+             
+    }
+    .bird:hover .border2{
+        clip-path: inset(16% 22% 5% 9% round 14% 5% 10% 14%);
+        transform: rotate(137deg);
+    }
+    .bird:hover .border3{
+        transform: rotate(123deg);
+        clip-path: inset(0% 11% 65% 13% round 15% 5% 10% 21%);
+    }
+    .bird:hover .border4{
+        left: 26.9%;
+   
+    clip-path: inset(0% 8% 59% 15% round 15% 5% 4% 14%);
+    transform: rotate(44deg);
+     
+    }
+
+        .hair {
+            content: '';
+            position: absolute;
+            width: 55px;
+            height: 110px;
+            background: #dc002d;
+            border: 2px solid #000;
+            transform: rotate(-27deg);
+            top: -67px;
+            right: 44%;
+            border-radius: 50%;
+            box-shadow: -14px 3px 27px 4px black;
+        }
+
+        .hair::before {
+            content: '';
+            position: absolute;
+            width: 55px;
+            height: 110px;
+            background-color: #dc002d;
+            border: 2px solid #000;
+            transform: rotate(-27deg);
+            top: -30px;
+            right: 68%;
+            border-radius: 50%;
+            box-shadow: -12px 3px 27px 4px black;
+        }
+
+        .navbar {
+            width: 80%;
+            background-color: #920086;
+            border-radius: 100px;
+            box-shadow: 5px 3px 27px 4px black;
+            margin: auto;
+        }
+
+        .navbar ul {
+            overflow: auto;
+        }
+
+        .navbar li {
+            float: left;
+            list-style: none;
+            margin: 0px 20px;
+        }
+
+        .navbar li a {
+            padding: 4px 2px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .search {
+            float: right;
+            color: white;
+            padding: 1px 1px;
+            text-align: center;
+        }
+
+        .navbar input {
+            border: 1px solid black;
+            border-radius: 100px;
+            padding: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">contact us</a></li>
+                <div class="search">
+                    <input type="text" name="search" id="search" placeholder="Search this website">
+                </div>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+
+        <div class="bird">
+            <div class="tails">
+                <div class="tail-middle"></div>
+                <div class="tail-top"></div>
+                <div class="tail-bottom"></div>
+            </div>
+
+            <div class="hair"></div>
+            <div class="head"></div>
+            <div class="eyebrow-right"></div>
+            <div class="eyebrow-left"></div>
+            <div class="eyeright">
+                <div class="eye"><div class="eyeball"></div></div>
+            </div>
+            <div class="eyeleft">
+                <div class="eye"><div class="eyeball"></div></div>
+            </div>
+            <div class="border1"></div>
+        <div class="border2"></div>
+        <div class="border3"></div>
+        <div class="border4"></div>
+        <div class="beaktop"></div>
+
+        <div class="beak"></div>
+        <div class="beakline"></div>
+        <div class="beakdown"></div>
+        </div>
+    </div>
+</body>
+
+</html>
